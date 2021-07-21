@@ -1,4 +1,5 @@
 const Clubhouse = require('clubhouse-lib');
+const core = require('@actions/core');
 
 const clubhouseToken = process.env.INPUT_CLUBHOUSETOKEN;
 const client = Clubhouse.create(clubhouseToken);
@@ -124,6 +125,12 @@ function addEndStateId(story, workflows, endStateName) {
     const workflowState = workflow.states.find(
         state => state.name === endStateName
     );
+
+    if (!workflowState) {
+        core.warning(`End state not found for story ${story.id}, skipping`);
+        return story;
+    }
+
     return {
         ...story,
         endStateId: workflowState.id
@@ -216,7 +223,7 @@ async function releaseStories(
         storiesWithUpdatedDescriptions,
         workflows,
         endStateName
-    );
+    ).filter(e => e.endStateId != null);
     const updatedStoryNames = await updateStories(storiesWithEndStateIds);
     return updatedStoryNames;
 }
