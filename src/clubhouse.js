@@ -32,6 +32,7 @@ async function addDetailstoStory(storyId) {
             // clubhouse represents all IDs as numbers
             storyId: story.id,
             projectId: story.project_id,
+            workflowId: story.workflow_id,
             name: story.name,
             description: story.description
         };
@@ -120,7 +121,7 @@ function updateDescriptionsMaybe(stories, releaseUrl, shouldUpdateDescription) {
 
 function addEndStateId(story, workflows, endStateName) {
     const workflow = workflows.find(
-        workflow => workflow.project_ids.includes(story.projectId)
+        workflow => workflow.id === story.workflowId
     );
     const workflowState = workflow.states.find(
         state => state.name === endStateName
