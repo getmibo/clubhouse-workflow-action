@@ -29,7 +29,7 @@
   "dependencies": {
     "@actions/core": "^1.2.6",
     "@actions/github": "^4.0.0",
-    "clubhouse-lib": "^0.10.0"
+    "@useshortcut/client": "^1.0.0"
   },
   "devDependencies": {
     "@zeit/ncc": "^0.22.3",

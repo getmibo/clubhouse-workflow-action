@@ -1,8 +1,9 @@
-const Clubhouse = require('clubhouse-lib');
+//const Clubhouse = require('clubhouse-lib');
+const { ShortcutClient }  = require('@useshortcut/client');
 const core = require('@actions/core');
 
 const clubhouseToken = process.env.INPUT_CLUBHOUSETOKEN;
-const client = Clubhouse.create(clubhouseToken);
+const client = new ShortcutClient(clubhouseToken);
 
 /**
  * Finds all clubhouse story IDs in some string content.
